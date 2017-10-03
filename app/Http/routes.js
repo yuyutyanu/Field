@@ -17,4 +17,5 @@
 
 const Route = use('Route')
 
-Route.on('/').render('welcome')
+Route.on('/').render('lobby')
+Route.on('/room').render('room')

@@ -1,0 +1,22 @@
+{% extends 'master' %}
+
+{% block css %}
+    <link rel="stylesheet" href="/css/lobby.css">
+{% endblock %}
+
+{% block content %}
+    <div class="rooms-wrapper">
+        <div class="rooms">
+            <a href="room" class="room"><p>#1</p></a>
+            <a href="room" class="room"><p>#2</p></a>
+            <a href="room" class="room"><p>#3</p></a>
+            <a href="room" class="room"><p>#4</p></a>
+            <a href="room" class="room"><p>#4</p></a>
+            <a href="room" class="room"><p>#4</p></a>
+        </div>
+    </div>
+
+    <button class="create-room">+</button>
+
+    <script src="/js/lobby.js"></script>
+{% endblock %}
