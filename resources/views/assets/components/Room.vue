@@ -4,7 +4,7 @@
 
         <div class="md">
             <div class="before">
-                <textarea name="" id="" cols="30" rows="10" v-model="before"></textarea>
+                <textarea name="" id="" cols="30" rows="10" v-model="before" @input="socket"></textarea>
             </div>
             <div class="after" v-html="after">
             </div>
@@ -60,12 +60,12 @@
       }
     },
     methods:{
-      with(){
+      socket(){
+        const _me = this
         client.joinRoom('lobby', {}, function (error, joined) {
-          client.emit('message', 'hello world')
-          console.log('joined error : ', error, 'joined : ', joined)
+          client.emit('message', _me.before)
           client.on('message', function (room, message) {
-            console.log(room, message)
+            _me.before = message
           })
         })
       }
