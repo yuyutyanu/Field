@@ -1,16 +1,15 @@
 <template>
     <div class="">
         <p class="room-number">Room: #123</p>
-        <div class="container">
-            <div class="md">
-                <div class="before">
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
-                </div>
-                <div class="after">
 
-                </div>
+        <div class="md">
+            <div class="before">
+                <textarea name="" id="" cols="30" rows="10" v-model="before"></textarea>
+            </div>
+            <div class="after" v-html="after">
             </div>
         </div>
+
         <!--<div class="sidebar">-->
         <!--<div class="invite">-->
         <!--<img src="/assets/favicon.png" alt="">-->
@@ -30,9 +29,46 @@
 
 <script>
   import marked from 'marked'
+  import ws from 'adonis-websocket-client'
+  const io = ws('http://localhost:3333', {})
+  const client = io.channel('chat').connect()
   export default {
-    created(){
-      console.log(marked('# Marked in browser\n\nRendered by **marked**.'))
+    data () {
+      return {
+        before: `# Welcome to Your Vue.js App
+## Welcome to Your Vue.js App
+
+### hoge
+
+* hogehoge
+* hogehoge
+* hogehoge
+
+
+# React Native
+
+## untarakantara
+### untarakantara
+* untara
+* untara
+        `
+      }
+    },
+    computed: {
+      after(){
+        return marked(this.before)
+      }
+    },
+    methods:{
+      with(){
+        client.joinRoom('lobby', {}, function (error, joined) {
+          client.emit('message', 'hello world')
+          console.log('joined error : ', error, 'joined : ', joined)
+          client.on('message', function (room, message) {
+            console.log(room, message)
+          })
+        })
+      }
     }
   }
 </script>
