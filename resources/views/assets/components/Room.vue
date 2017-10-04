@@ -1,10 +1,10 @@
 <template>
     <div class="">
-        <p class="room-number">Room: #123</p>
+        <p class="room-number">Room: #{{id}}</p>
 
         <div class="md">
             <div class="before">
-                <textarea name="" id="" cols="30" rows="10" v-model="before" @input="socket"></textarea>
+                <textarea name="" id="" cols="30" rows="10" v-model="before" @input="socket" @change="store"></textarea>
             </div>
             <div class="after" v-html="after">
             </div>
@@ -33,25 +33,18 @@
   const io = ws('http://localhost:3333', {})
   const client = io.channel('chat').connect()
   export default {
+    props:['id'],
+    created(){
+      const _me = this
+      client.joinRoom(`room${this.id}`, {}, function (error, joined) {
+        client.on('message', function (room, message) {
+          _me.before = message
+        })
+      })
+    },
     data () {
       return {
-        before: `# Welcome to Your Vue.js App
-## Welcome to Your Vue.js App
-
-### hoge
-
-* hogehoge
-* hogehoge
-* hogehoge
-
-
-# React Native
-
-## untarakantara
-### untarakantara
-* untara
-* untara
-        `
+        before:''
       }
     },
     computed: {
@@ -61,13 +54,7 @@
     },
     methods:{
       socket(){
-        const _me = this
-        client.joinRoom('lobby', {}, function (error, joined) {
-          client.emit('message', _me.before)
-          client.on('message', function (room, message) {
-            _me.before = message
-          })
-        })
+        client.emit('message', this.before)
       }
     }
   }

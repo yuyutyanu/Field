@@ -18,4 +18,4 @@
 const Route = use('Route')
 
 Route.on('/').render('lobby')
-Route.on('/room').render('room')
+Route.get('/:room_id','RoomController.index')
