@@ -1,33 +1,96 @@
-body{
+body {
     background: #27313D;
     font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
 }
 
-.container{
-    width:1200px;
-    height:90vh;
-    background:#fff;
-    margin:0 auto;
-    position:absolute;
-    top:50%;
-    left:50%;
+.container {
+    width: 1200px;
+    height: 90vh;
+    background: #fff;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
 }
-.md{
-    height:100%;
+
+.room-number {
+    position: absolute;
+    color: #fff;
+    font-weight: 600;
+    left: 20px;
+    top: 15px;
+    font-size: 16px;
+}
+
+.md {
+    height: 100%;
     letter-spacing: -.4em;
+    border: solid 10px #DE4830;
+    box-sizing: border-box;
 }
-.md .before{
-    width:50%;
-    height:100%;
-    overflow-y:scroll;
+
+.md .before {
+    width: 50%;
+    height: 100%;
+    overflow-y: auto;
     display: inline-block;
     letter-spacing: normal;
 }
-.md .after{
+
+.md .before textarea {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    font-size: 15px;
+    letter-spacing: 2px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.md .after {
     display: inline-block;
-    width:50%;
-    height:100%;
-    overflow-y:scroll;
+    width: 50%;
+    height: 100%;
+    overflow-y: auto;
     letter-spacing: normal;
 }
+
+/*.sidebar {*/
+ /**/
+/*}*/
+
+/*.sidebar .invite {*/
+    /*height: 86.666666667px;*/
+    /*margin-bottom: 10px;*/
+    /*width: 100%;*/
+    /*text-align: center;*/
+/*}*/
+
+/*.sidebar .invite p {*/
+    /*color: #27313D;*/
+    /*font-weight: 600;*/
+/*}*/
+
+/*.sidebar .import {*/
+    /*height: 86.666666667px;*/
+    /*margin-bottom: 10px;*/
+    /*width: 100%;*/
+    /*text-align: center;*/
+/*}*/
+
+/*.sidebar .import p {*/
+    /*color: #27313D;*/
+    /*font-weight: 600;*/
+/*}*/
+
+/*.sidebar .export {*/
+    /*height: 86.666666667px;*/
+    /*width: 100%;*/
+    /*text-align: center;*/
+/*}*/
+
+/*.sidebar .export p {*/
+    /*color: #27313D;*/
+    /*font-weight: 600;*/
+/*}*/

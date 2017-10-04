@@ -11,19 +11,20 @@
   <link rel="icon" href="/assets/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="/css/reset.css">
   {% block css %}{% endblock %}
-  <script src="https://unpkg.com/adonis-websocket-client@1.0.2/dist/ws.js"></script>
-
 </head>
 <body>
 
   <section>
     <div class="__wrapper">
+      <div id="app">
       {% block content %}{% endblock %}
 
       {% block footer %}
 
       {% endblock %}
+      </div>
     </div>
   </section>
+  <script src="build.js"></script>
 </body>
 </html>

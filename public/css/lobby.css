@@ -24,9 +24,12 @@ body{
   display: block;
   text-decoration: none;
   color:#fff;
-  background:rgba(255,255,255,0.1);
-  border-radius: 10px;
+  border-right:solid 2px #27313D;
+  border-left:solid 2px #27313D;
   margin-bottom:20px;
+}
+.rooms .room:hover{
+  background:rgba(255,255,255,0.1)
 }
 .rooms .room:last-child{
   margin:0;
