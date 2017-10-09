@@ -9,7 +9,9 @@
     "serve": "node server.js",
     "lint": "standard",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "watch": "cross-env NODE_ENV=production webpack --watch --progress --hide-modules"
+    "watch": "cross-env NODE_ENV=production webpack --watch --progress --hide-modules",
+    "pg": "docker build -t with-md ./ ; docker run -p 5432:5432 -d --name withMd  with-md ",
+    "migrate": "./ace migration:refresh"
   },
   "author": "",
   "license": "MIT",
@@ -27,6 +29,7 @@
     "adonis-websocket-client": "^1.0.2",
     "axios": "^0.16.2",
     "marked": "^0.3.6",
+    "pg": "^7.3.0",
     "vue": "^2.3.3",
     "youch": "^2.0.4"
   },
