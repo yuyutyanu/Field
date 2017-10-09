@@ -18,4 +18,9 @@
 const Route = use('Route')
 
 Route.on('/').render('lobby')
-Route.get('/:room_id','RoomController.index')
+Route.get('/rooms', 'RoomController.index')
+Route.get('/rooms/:id','RoomController.show')
+Route.post('/room', 'RoomController.store')
+
+Route.get('/login/:id', 'AuthController.index')
+Route.post('/login', 'AuthController.store')

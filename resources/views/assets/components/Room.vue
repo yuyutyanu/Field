@@ -9,21 +9,6 @@
             <div class="after" v-html="after">
             </div>
         </div>
-
-        <!--<div class="sidebar">-->
-        <!--<div class="invite">-->
-        <!--<img src="/assets/favicon.png" alt="">-->
-        <!--<p>invite</p>-->
-        <!--</div>-->
-        <!--<div class="import">-->
-        <!--<img src="/assets/favicon.png" alt="">-->
-        <!--<p>import</p>-->
-        <!--</div>-->
-        <!--<div class="export">-->
-        <!--<img src="/assets/favicon.png" alt="">-->
-        <!--<p>export</p>-->
-        <!--</div>-->
-        <!--</div>-->
     </div>
 </template>
 
