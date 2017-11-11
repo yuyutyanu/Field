@@ -3,7 +3,7 @@ const Room = use('App/Model/Room')
 
 class RoomController {
 
-  *index(req, res) {
+  *index (req, res) {
     const rooms = yield Room.all()
 
     if (rooms) {
@@ -13,7 +13,7 @@ class RoomController {
     res.send('Sorry, cannot find the selected found')
   }
 
-  *show(req, res) {
+  *show (req, res) {
     const id = req.param('id')
     const RoomID = yield req.session.get('RoomID')
 
@@ -24,8 +24,8 @@ class RoomController {
     }
   }
 
-  *store(req, res) {
-    const room = new Room()
+  *store (req, res) {
+    let room = new Room()
     room.password = req.input('password')
     yield room.save()
     yield req.session.put('RoomID', room.id)

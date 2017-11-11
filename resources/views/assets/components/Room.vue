@@ -17,7 +17,7 @@
     <div class="container">
       <div class="md markdown-body">
         <div class="before">
-          <textarea name="" id="" cols="30" rows="10" v-model="before" @input="socket"></textarea>
+          <textarea name="" id="" v-model="before" @keyup.enter="socket"></textarea>
         </div>
         <div class="after" v-html="after">
         </div>
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+  import { http } from '../ApiService'
   import marked from 'marked'
   import ws from 'adonis-websocket-client'
   const client = ws('https://field-md.herokuapp.com', {}).channel('md').connect()
@@ -36,6 +37,8 @@
     props: ['id'],
     created(){
       let _me = this
+      _me.fetchText()
+
       client.joinRoom(this.id, {}, function (error, joined) {
         client.on('message', function (room, message) {
           _me.before = message
@@ -51,7 +54,7 @@
     },
     computed: {
       after(){
-        return marked(this.before)
+        return this.before ? marked(this.before) : marked("## Press enter to share")
       },
       url(){
         return location.href
@@ -60,6 +63,16 @@
     methods: {
       socket(){
         client.emit('message', this.before)
+        this.storeText()
+      },
+      storeText(){
+        http.put(`/room/${this.id}/text`, {md: this.before})
+      },
+      fetchText(){
+        let _me = this
+        http.get(`/room/${this.id}/text`).then(function ({data}) {
+          _me.before = data.md
+        })
       },
       reset(){
         this.isCopy = false
@@ -79,8 +92,8 @@
 </script>
 
 <style scoped>
-  #url{
-    font-size:0px;
+  #url {
+    font-size: 0px;
   }
 
   .invite {
@@ -92,8 +105,9 @@
     display: inline-block;
     margin-right: 10px;
   }
-  .message span{
-    font-size:14px;
+
+  .message span {
+    font-size: 14px;
     color: #fff;
   }
 
@@ -111,7 +125,7 @@
     margin-left: 10px;
     color: #fff;
     outline: none;
-    font-size:14px;
+    font-size: 14px;
   }
 
   .copy button:hover {

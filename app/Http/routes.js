@@ -21,6 +21,8 @@ Route.on('/').render('lobby')
 Route.get('/rooms', 'RoomController.index')
 Route.get('/rooms/:id','RoomController.show')
 Route.post('/room', 'RoomController.store')
+Route.get('/room/:id/text', 'MdController.index')
+Route.put('/room/:id/text', 'MdController.store')
 
 Route.get('/login/:id', 'AuthController.index')
 Route.post('/login', 'AuthController.store')

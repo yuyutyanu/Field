@@ -8,6 +8,7 @@ class RoomsTableSchema extends Schema {
     this.create('rooms', (table) => {
       table.increments()
       table.string('password')
+      table.text('text')
       table.timestamps()
     })
   }
