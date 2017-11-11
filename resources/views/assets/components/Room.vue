@@ -29,7 +29,7 @@
 <script>
   import marked from 'marked'
   import ws from 'adonis-websocket-client'
-  const client = ws('http://localhost:3333', {}).channel('md').connect()
+  const client = ws(process.env.PORT || 'http://localhost:3333', {}).channel('md').connect()
 
   export default {
     props: ['id'],
