@@ -4,7 +4,7 @@
 
         <div class="md">
             <div class="before">
-                <textarea name="" id="" cols="30" rows="10" v-model="before" @input="socket" @change="store"></textarea>
+                <textarea name="" id="" cols="30" rows="10" v-model="before" @input="socket"></textarea>
             </div>
             <div class="after" v-html="after">
             </div>
@@ -16,13 +16,15 @@
   import marked from 'marked'
   import ws from 'adonis-websocket-client'
   const io = ws('http://localhost:3333', {})
-  const client = io.channel('chat').connect()
+  const client = io.channel('md').connect()
   export default {
     props:['id'],
     created(){
-      const _me = this
-      client.joinRoom(`room${this.id}`, {}, function (error, joined) {
+      let _me = this
+      client.joinRoom(this.id, {}, function (error, joined) {
         client.on('message', function (room, message) {
+          console.log(message)
+          console.log(room)
           _me.before = message
         })
       })

@@ -17,5 +17,5 @@
 const Ws = use('Ws')
 
 Ws
-.channel('/chat', 'ChatController')
+.channel('/md', 'MdController')
 
