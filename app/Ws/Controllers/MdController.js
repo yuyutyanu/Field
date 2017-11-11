@@ -1,6 +1,6 @@
 'use strict'
 
-class ChatController {
+class MdController {
 
   constructor(socket, request) {
     this.socket = socket
@@ -18,4 +18,4 @@ class ChatController {
   }
 }
 
-module.exports = ChatController
+module.exports = MdController

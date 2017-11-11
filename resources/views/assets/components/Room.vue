@@ -15,16 +15,14 @@
 <script>
   import marked from 'marked'
   import ws from 'adonis-websocket-client'
-  const io = ws('http://localhost:3333', {})
-  const client = io.channel('md').connect()
+  const client = ws('http://localhost:3333', {}).channel('md').connect()
+
   export default {
     props:['id'],
     created(){
       let _me = this
       client.joinRoom(this.id, {}, function (error, joined) {
         client.on('message', function (room, message) {
-          console.log(message)
-          console.log(room)
           _me.before = message
         })
       })
