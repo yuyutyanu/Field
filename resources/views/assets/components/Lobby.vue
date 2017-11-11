@@ -41,3 +41,111 @@
     }
   }
 </script>
+
+<style scoped>
+    .rooms-wrapper{
+        height:350px;
+        width:350px;
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+    }
+    .rooms{
+        height:350px;
+        width:350px;
+        background: #DE4830;
+        text-align: center;
+        padding:20px;
+        box-sizing: border-box;
+        border-radius: 10px;
+        overflow-y:scroll;
+    }
+    .rooms .room{
+        display: block;
+        text-decoration: none;
+        color:#fff;
+        border-right:solid 2px #27313D;
+        border-left:solid 2px #27313D;
+        margin-bottom:20px;
+    }
+    .rooms .room:hover{
+        background:rgba(255,255,255,0.1)
+    }
+    .rooms .room:last-child{
+        margin:0;
+    }
+    .rooms .room p{
+        font-size:20px;
+        padding-top: 21.25px;
+        padding-bottom: 21.25px;
+        font-weight: 600;
+        letter-spacing: 4px;
+        color:#F7F7F7;
+    }
+
+    .create-room-button{
+        position: absolute;
+        bottom:15%;
+        left:50%;
+        transform: translate(-50%, 0);
+        padding:20px;
+        background:#ECB935;
+        font-size:12px;
+        color:#fff;
+        border:solid 0px #fff;
+        border-radius:3px;
+        cursor: pointer;
+        outline: none;
+    }
+    .create-room{
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+        background:#27313D;
+        border-radius:10px;
+        text-align: center;
+        padding:20px;
+        box-sizing: border-box;
+    }
+    .create-room input{
+        background:#fff;
+        border:solid 0px;
+        letter-spacing: 2px;
+        width:80%;
+        height:30px;
+        color:#27313D;
+        margin-bottom:30px;
+        border-radius:3px;
+        text-align: center;
+        font-weight: 400;
+        outline: none;
+    }
+    .create-room button{
+        height:30px;
+        background:#fff;
+        color:#27313D;
+        border:solid 0px;
+        border-radius:3px;
+        letter-spacing: 2px;
+        cursor: pointer;
+        outline: none;
+    }
+    .create-room .close{
+        position: absolute;
+        bottom:20px;
+        right:20px;
+        color:#fff;
+        background:#26313D;
+        border:solid 3px #fff;
+        text-align: center;
+    }
+
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0
+    }
+</style>
