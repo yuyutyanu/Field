@@ -7,10 +7,9 @@ class RoomController {
     const rooms = yield Room.all()
 
     if (rooms) {
-      yield res.json(rooms)
-      return
+      return res.json(rooms)
     }
-    res.send('Sorry, cannot find the selected found')
+    return res.send('Sorry, cannot find the selected found')
   }
 
   *show (req, res) {
@@ -18,9 +17,9 @@ class RoomController {
     const RoomID = yield req.session.get('RoomID')
 
     if (RoomID == id) {
-      yield res.sendView('room', {room_id: id})
+      return yield res.sendView('room', {room_id: id})
     } else {
-      res.redirect(`/login/${req.param('id')}`)
+      return res.redirect(`/login/${req.param('id')}`)
     }
   }
 
@@ -29,7 +28,7 @@ class RoomController {
     room.password = req.input('password')
     yield room.save()
     yield req.session.put('RoomID', room.id)
-    res.json({room_id: room.id})
+    return res.json({room_id: room.id})
   }
 }
 
