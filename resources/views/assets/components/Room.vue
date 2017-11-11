@@ -161,6 +161,7 @@
 
   .md .after {
     display: inline-block;
+    vertical-align: top;
     width: 50%;
     height: 100%;
     overflow-y: auto;
