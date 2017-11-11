@@ -1,1 +1,1 @@
-web: yarn build && yarn migrate && yarn serve
+web: node ./ace migration:refresh --force && npm run serve
