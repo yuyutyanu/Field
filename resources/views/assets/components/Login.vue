@@ -76,7 +76,7 @@
 
     .failed{
         position: absolute;
-        top:65%;
+        top:75%;
         left:50%;
         transform: translate(-50%, -50%);
         letter-spacing: 2px;
