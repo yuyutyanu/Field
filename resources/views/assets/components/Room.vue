@@ -54,7 +54,7 @@
     },
     computed: {
       after(){
-        return marked(this.before)
+        return this.before ? marked(this.before) : ""
       },
       url(){
         return location.href
