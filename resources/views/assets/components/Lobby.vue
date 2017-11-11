@@ -59,7 +59,7 @@
         padding:20px;
         box-sizing: border-box;
         border-radius: 10px;
-        overflow-y:scroll;
+        overflow-y:hidden;
     }
     .rooms .room{
         display: block;

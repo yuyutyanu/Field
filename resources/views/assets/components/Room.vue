@@ -17,7 +17,7 @@
     <div class="container">
       <div class="md markdown-body">
         <div class="before">
-          <textarea name="" id="" v-model="before" @keyup.enter="socket"></textarea>
+          <textarea name="" id="" v-model="before" @keyup.enter="socket" placeholder="Press enter to share"></textarea>
         </div>
         <div class="after" v-html="after">
         </div>
@@ -54,7 +54,7 @@
     },
     computed: {
       after(){
-        return this.before ? marked(this.before) : marked("## Press enter to share")
+        return marked(this.before)
       },
       url(){
         return location.href
