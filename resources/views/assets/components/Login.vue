@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import {send} from '../ApiService'
+  import {http} from '../ApiService'
   export default{
     props: ["id"],
     data(){
@@ -21,7 +21,7 @@
     },
     methods: {
       inRoom(){
-        send('post', 'login', {id: this.id, password: this.password}).then(({data}) => {
+        http.post('login', {id: this.id, password: this.password}).then(({data}) => {
           if(!data.success) throw new Error()
           location.href = `/rooms/${this.id}`
         }).catch((e)=>{

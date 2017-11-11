@@ -8,9 +8,9 @@
     "serve:dev": "nodemon --watch app --watch bootstrap --watch config --watch .env -x node server.js",
     "serve": "node server.js",
     "lint": "standard",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "watch": "cross-env NODE_ENV=production webpack --watch --progress --hide-modules",
-    "pg": "docker build -t with-md ./ ; docker run -p 5432:5432 -d --name withMd  with-md ",
+    "build": "webpack --progress --hide-modules",
+    "watch": "webpack --watch --progress --hide-modules",
+    "pg": "docker build -t field ./ ; docker run -p 5432:5432 -d --name field  field ",
     "migrate": "./ace migration:refresh"
   },
   "author": "",

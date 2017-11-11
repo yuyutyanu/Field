@@ -18,7 +18,7 @@
     </section>
 </template>
 <script>
-  import {send} from '../ApiService'
+  import {http} from '../ApiService'
   export default{
     data(){
       return {
@@ -28,13 +28,13 @@
       }
     },
     created(){
-      send('get','/rooms').then(({data}) => {
+      http.get('/rooms').then(({data}) => {
         this.rooms = data
       })
     },
     methods: {
       createRoom(){
-        send('post', '/room', {password: this.password}).then(({data}) => {
+        http.post('/room', {password: this.password}).then(({data}) => {
             location.href = `/rooms/${data.room_id}`
         })
       }
