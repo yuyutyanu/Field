@@ -15,7 +15,7 @@
     </div>
 
     <div class="container">
-      <div class="md">
+      <div class="md markdown-body">
         <div class="before">
           <textarea name="" id="" cols="30" rows="10" v-model="before" @input="socket"></textarea>
         </div>

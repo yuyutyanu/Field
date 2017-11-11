@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/github-markdown.min.css">
   <title>field</title>
 </head>
 <body>
@@ -13,10 +14,6 @@
     <div class="__wrapper">
       <div id="app">
       {% block content %}{% endblock %}
-
-      {% block footer %}
-
-      {% endblock %}
       </div>
     </div>
   </section>
@@ -25,6 +22,9 @@
     body {
       background: #27313D;
       font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+    }
+    .markdown-body {
+      color: #334257;
     }
   </style>
 </body>
