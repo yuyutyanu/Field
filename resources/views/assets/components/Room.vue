@@ -1,7 +1,7 @@
 <template>
   <div>
-
     <div class="invite">
+      <span id="url">{{url}}</span>
       <transition name="fade">
         <div class="message" v-if="isVisible">
           <span v-if="isCopy">Copied!: {{url}} </span>
@@ -10,7 +10,7 @@
       </transition>
 
       <div class="copy">
-        <button @mouseover='isVisible = !isVisible' @click="isCopy = !isCopy" @mouseout="reset">Invite url︎</button>
+        <button @mouseover='isVisible = !isVisible' @click="urlCopy" @mouseout="reset">Invite url︎</button>
       </div>
     </div>
 
@@ -63,12 +63,24 @@
       reset(){
         this.isCopy = false
         this.isVisible = false
+      },
+      urlCopy(){
+        const target = document.getElementById('url')
+        const range = document.createRange()
+        range.selectNode(target)
+        window.getSelection().removeAllRanges()
+        window.getSelection().addRange(range)
+        document.execCommand('copy')
+        this.isCopy = true
       }
     }
   }
 </script>
 
 <style scoped>
+  #url{
+    font-size:0px;
+  }
 
   .invite {
     width: auto;
