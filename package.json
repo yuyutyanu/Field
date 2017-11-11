@@ -9,7 +9,7 @@
     "build": "webpack --progress --hide-modules",
     "watch": "webpack --watch --progress --hide-modules",
     "pg": "docker build -t field ./ ; docker run -p 5432:5432 -d --name field  field ",
-    "migrate": "./ace migration:refresh"
+    "migrate": "./ace migration:refresh:refresh"
   },
   "author": "",
   "license": "MIT",
