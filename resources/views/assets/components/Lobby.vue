@@ -44,7 +44,6 @@
 
 <style scoped>
     .rooms-wrapper{
-        height:350px;
         width:350px;
         position: absolute;
         top:50%;
@@ -53,7 +52,6 @@
     }
     .rooms{
         height:350px;
-        width:350px;
         background: #DE4830;
         text-align: center;
         padding:20px;
@@ -113,7 +111,7 @@
         background:#fff;
         border:solid 0px;
         letter-spacing: 2px;
-        width:80%;
+        width:70%;
         height:30px;
         color:#27313D;
         margin-bottom:30px;
@@ -133,9 +131,6 @@
         outline: none;
     }
     .create-room .close{
-        position: absolute;
-        bottom:20px;
-        right:20px;
         color:#fff;
         background:#26313D;
         border:solid 3px #fff;
@@ -147,5 +142,29 @@
     }
     .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
         opacity: 0
+    }
+
+    @media screen and (max-width:480px) {
+        .rooms-wrapper{
+            width:100%;
+            position:static;
+            transform:translate(0,0);
+            -webkit-border-radius: 0px;
+            -moz-border-radius: 0px;
+        }
+        .rooms{
+            height:90vh;
+            border-radius: 0px;
+            overflow-y: auto;
+        }
+        .create-room-button{
+            height:10vh;
+            width:100%;
+            -webkit-border-radius: 0px;
+            -moz-border-radius: 0px;
+            border-radius: 0px;
+            position: static;
+            transform:translate(0,0);
+        }
     }
 </style>

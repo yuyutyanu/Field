@@ -31,7 +31,7 @@
   import marked from 'marked'
   import ws from 'adonis-websocket-client'
   const client = ws('https://field-md.herokuapp.com', {}).channel('md').connect()
-//    const client = ws('http://localhost:3333', {}).channel('md').connect()
+  //  const client = ws('http://localhost:3333', {}).channel('md').connect()
 
   export default {
     props: ['id'],
@@ -103,7 +103,6 @@
 
   .message {
     display: inline-block;
-    margin-right: 10px;
   }
 
   .message span {
@@ -113,8 +112,8 @@
 
   .copy {
     display: inline-block;
-    padding: 25px;
-    right: 20px;
+    margin-top: 25px;
+    margin-right: 25px;
   }
 
   .copy button {
@@ -192,5 +191,39 @@
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
   {
     opacity: 0
+  }
+
+  @media screen and (max-width: 480px) {
+    .invite {
+      text-align: right;
+    }
+
+    .container {
+      width: 100%;
+      position: static;
+      transform: translate(0, 0);
+    }
+
+    .container .md {
+      height: 90vh;
+      border: solid 10px #DE4830;
+      box-sizing: border-box;
+      border-radius: 0px;
+    }
+
+    .message span {
+      color: #fff;
+      font-size: 10px;
+    }
+
+    .copy {
+      margin: 0;
+      width: 25%;
+    }
+
+    .copy button {
+      height: 10vh;
+      margin: 0;
+    }
   }
 </style>
