@@ -157,6 +157,11 @@
             border-radius: 0px;
             overflow-y: auto;
         }
+        .close{
+            display: block;
+            margin: 0 auto;
+            margin-top:15px;
+        }
         .create-room-button{
             height:10vh;
             width:100%;

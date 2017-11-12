@@ -210,6 +210,16 @@
       box-sizing: border-box;
       border-radius: 0px;
     }
+    .md .before {
+      display: block;
+      width:100%;
+      height:calc(45vh - 10px);
+    }
+    .md .after {
+      display: block;
+      width:100%;
+      height:calc(45vh - 10px);
+    }
 
     .message span {
       color: #fff;
