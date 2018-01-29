@@ -1,10 +1,9 @@
 import axios from 'axios'
 
-// export const http = axios.create({
-//   baseURL: 'https://field-md.herokuapp.com'
-// })
+const baseURL = `${location.protocol}//${location.host}/api/v1/`
 
 export const http = axios.create({
-  baseURL: 'http://localhost:3333'
+  baseURL: baseURL
 })
 
+console.log(baseURL)

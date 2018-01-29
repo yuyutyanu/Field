@@ -1,28 +1,31 @@
 'use strict'
 
 /*
-|--------------------------------------------------------------------------
-| Router
-|--------------------------------------------------------------------------
-|
-| AdonisJs Router helps you in defining urls and their actions. It supports
-| all major HTTP conventions to keep your routes file descriptive and
-| clean.
-|
-| @example
-| Route.get('/user', 'UserController.index')
-| Route.post('/user', 'UserController.store')
-| Route.resource('user', 'UserController')
-*/
+ |--------------------------------------------------------------------------
+ | Router
+ |--------------------------------------------------------------------------
+ |
+ | AdonisJs Router helps you in defining urls and their actions. It supports
+ | all major HTTP conventions to keep your routes file descriptive and
+ | clean.
+ |
+ | @example
+ | Route.get('/user', 'UserController.index')
+ | Route.post('/user', 'UserController.store')
+ | Route.resource('user', 'UserController')
+ */
 
 const Route = use('Route')
 
 Route.on('/').render('lobby')
-Route.get('/rooms', 'RoomController.index')
-Route.get('/rooms/:id','RoomController.show')
-Route.post('/room', 'RoomController.store')
-Route.get('/room/:id/text', 'MdController.index')
-Route.put('/room/:id/text', 'MdController.store')
 
+Route.get('/rooms/:id', 'RoomController.show')
 Route.get('/login/:id', 'AuthController.index')
-Route.post('/login', 'AuthController.store')
+
+Route.group('version1', function () {
+  Route.get('/rooms', 'RoomController.index')
+  Route.post('/room', 'RoomController.store')
+  Route.post('/login', 'AuthController.store')
+  Route.get('/room/:id/text', 'MdController.index')
+  Route.put('/room/:id/text', 'MdController.store')
+}).prefix('api/v1')

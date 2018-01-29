@@ -3,7 +3,7 @@
   "version": "3.2.1",
   "main": "server.js",
   "scripts": {
-    "serve:dev": "nodemon --watch app --watch bootstrap --watch config --watch .env -x node server.js",
+    "serve:dev": "cross-env API_URL=http://localhost:3333 nodemon --watch app --watch bootstrap --watch config --watch .env -x node server.js",
     "serve": "node server.js",
     "lint": "standard",
     "build": "webpack --progress --hide-modules",
@@ -42,7 +42,6 @@
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
     "babel-preset-env": "^1.5.1",
-    "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",
     "file-loader": "^0.9.0",
     "nodemon": "^1.11.0",

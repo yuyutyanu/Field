@@ -30,8 +30,7 @@
   import { http } from '../ApiService'
   import marked from 'marked'
   import ws from 'adonis-websocket-client'
-  const client = ws('https://field-md.herokuapp.com', {}).channel('md').connect()
-  //  const client = ws('http://localhost:3333', {}).channel('md').connect()
+  const client = ws(`${location.protocol}//${location.host}`, {}).channel('md').connect()
 
   export default {
     props: ['id'],
