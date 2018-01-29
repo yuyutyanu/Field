@@ -9,7 +9,7 @@ class MdController {
 
   * joinRoom (room, payload, socket) {
     socket.on('message', function(message){
-      socket.inRoom(room).toEveryone().emit('message', message)
+      socket.inRoom(room).exceptMe().emit('message', message)
     })
   }
 

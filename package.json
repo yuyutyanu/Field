@@ -3,7 +3,7 @@
   "version": "3.2.1",
   "main": "server.js",
   "scripts": {
-    "serve:dev": "cross-env API_URL=http://localhost:3333 nodemon --watch app --watch bootstrap --watch config --watch .env -x node server.js",
+    "serve:dev": "nodemon --watch app --watch bootstrap --watch config --watch .env -x node server.js",
     "serve": "node server.js",
     "lint": "standard",
     "build": "webpack --progress --hide-modules",
@@ -14,6 +14,7 @@
   "description": "",
   "private": true,
   "dependencies": {
+    "ace-min-noconflict": "^1.1.9",
     "adonis-ace": "^3.0.7",
     "adonis-auth": "^1.0.5",
     "adonis-commands": "^2.1.5",

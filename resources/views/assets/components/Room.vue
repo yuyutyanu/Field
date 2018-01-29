@@ -16,8 +16,7 @@
 
     <div class="container">
       <div class="md markdown-body">
-        <div class="before">
-          <textarea name="" id="" v-model="before" @keyup.enter="socket" placeholder="Press enter to share"></textarea>
+        <div id="before">
         </div>
         <div class="after" v-html="after">
         </div>
@@ -30,47 +29,63 @@
   import { http } from '../ApiService'
   import marked from 'marked'
   import ws from 'adonis-websocket-client'
+  import 'ace-min-noconflict'
+  import 'ace-min-noconflict/mode-javascript'
+
   const client = ws(`${location.protocol}//${location.host}`, {}).channel('md').connect()
 
   export default {
     props: ['id'],
-    created(){
-      let _me = this
-      _me.fetchText()
-
-      client.joinRoom(this.id, {}, function (error, joined) {
-        client.on('message', function (room, message) {
-          _me.before = message
-        })
-      })
+    mounted(){
+      this.editor = ace.edit("before");
+      this.editor.$blockScrolling = Infinity;
+      this.editor.session.setMode("ace/mode/javascript")
+      this.fetchText()
+      this.onEdit()
+      this.joinRoom()
     },
     data () {
       return {
-        before: '',
+        editor: '',
         isCopy: false,
-        isVisible: false
+        isVisible: false,
+        isEdit:false
       }
     },
     computed: {
       after(){
-        return this.before ? marked(this.before) : ""
+        if(!this.editor || this.isEdit){
+          return ""
+        }
+        console.log(marked(this.editor.getValue()))
+        return marked(this.editor.getValue())
       },
       url(){
         return location.href
       }
     },
     methods: {
-      socket(){
-        client.emit('message', this.before)
-        this.storeText()
+      joinRoom(){
+        client.joinRoom(this.id, {}, (error, joined) => {
+          client.on('message', (room, message) => {
+            this.editor.setValue(message)
+          })
+        })
       },
-      storeText(){
-        http.put(`/room/${this.id}/text`, {md: this.before})
+      onEdit(){
+        this.editor.on("change", (e)=>{
+          // user が変更した場合のみ watch
+          if(this.editor.curOp && this.editor.curOp.command.name) {
+            this.isEdit = true
+            client.emit('message', this.editor.getValue())
+            http.put(`/room/${this.id}/text`, {md: this.editor.getValue()})
+            this.isEdit = false
+          }
+        })
       },
       fetchText(){
-        let _me = this
-        http.get(`/room/${this.id}/text`).then(function ({data}) {
-          _me.before = data.md
+        http.get(`/room/${this.id}/text`).then(({data}) => {
+          this.editor.setValue(data.md)
         })
       },
       reset(){
@@ -149,27 +164,27 @@
     border-radius: 3px;
   }
 
-  .md .before {
+  .md #before {
     width: 50%;
     height: 100%;
     display: inline-block;
     letter-spacing: normal;
   }
 
-  .md .before textarea {
-    width: 100%;
-    height: 100%;
-    resize: none;
-    font-size: 15px;
-    letter-spacing: 2px;
-    padding: 20px;
-    box-sizing: border-box;
-    background: #F7F7F7;
-    outline: none;
-    overflow-y: auto;
-    border: solid 0px;
-    border-right: solid 1px #27313D;
-  }
+  /*.md #before textarea {*/
+    /*width: 100%;*/
+    /*height: 100%;*/
+    /*resize: none;*/
+    /*font-size: 15px;*/
+    /*letter-spacing: 2px;*/
+    /*padding: 20px;*/
+    /*box-sizing: border-box;*/
+    /*background: #F7F7F7;*/
+    /*outline: none;*/
+    /*overflow-y: auto;*/
+    /*border: solid 0px;*/
+    /*border-right: solid 1px #27313D;*/
+  /*}*/
 
   .md .after {
     display: inline-block;
@@ -209,7 +224,7 @@
       box-sizing: border-box;
       border-radius: 0px;
     }
-    .md .before {
+    .md #before {
       display: block;
       width:100%;
       height:calc(45vh - 10px);
