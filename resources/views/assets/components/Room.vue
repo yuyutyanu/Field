@@ -28,7 +28,6 @@
 <script>
   import { http } from '../ApiService'
   import marked from 'marked'
-  import ws from 'adonis-websocket-client'
 
   export default {
     props: ['id'],
