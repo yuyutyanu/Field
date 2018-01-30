@@ -7,9 +7,7 @@
     "serve": "node server.js",
     "lint": "standard",
     "build": "webpack --progress --hide-modules",
-    "watch": "webpack --watch --progress --hide-modules",
-    "heroku-postbuild":"./ace migration:refresh && ./ace db:seed && npm run build",
-    "start": "npm run serve"
+    "watch": "webpack --watch --progress --hide-modules"
   },
   "author": "",
   "license": "MIT",
@@ -27,9 +25,6 @@
     "adonis-websocket": "^1.0.4",
     "adonis-websocket-client": "^1.0.2",
     "axios": "^0.16.2",
-    "firebase": "^4.9.0",
-    "firepad": "^1.4.0",
-    "marked": "^0.3.6",
     "pg": "^7.3.0",
     "vue": "^2.3.3",
     "youch": "^2.0.4"
