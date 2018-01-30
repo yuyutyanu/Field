@@ -16,6 +16,6 @@
 
 const Ws = use('Ws')
 
-Ws
-.channel('/md', 'MdController')
+// Ws
+// .channel('/md', 'MdController')
 

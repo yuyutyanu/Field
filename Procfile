@@ -1,1 +1,1 @@
-web: node ./ace migration:refresh --force && npm run build && npm run serve
+web: npm start

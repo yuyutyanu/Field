@@ -29,63 +29,50 @@
   import { http } from '../ApiService'
   import marked from 'marked'
   import ws from 'adonis-websocket-client'
-  import 'ace-min-noconflict'
-  import 'ace-min-noconflict/mode-javascript'
-
-  const client = ws(`${location.protocol}//${location.host}`, {}).channel('md').connect()
 
   export default {
     props: ['id'],
     mounted(){
-      this.editor = ace.edit("before");
-      this.editor.$blockScrolling = Infinity;
-      this.editor.session.setMode("ace/mode/javascript")
-      this.fetchText()
-      this.onEdit()
-      this.joinRoom()
+      this.initFirePad()
     },
     data () {
       return {
         editor: '',
         isCopy: false,
         isVisible: false,
-        isEdit:false
+        after: null
       }
     },
     computed: {
-      after(){
-        if(!this.editor || this.isEdit){
-          return ""
-        }
-        console.log(marked(this.editor.getValue()))
-        return marked(this.editor.getValue())
-      },
       url(){
         return location.href
       }
     },
     methods: {
-      joinRoom(){
-        client.joinRoom(this.id, {}, (error, joined) => {
-          client.on('message', (room, message) => {
-            this.editor.setValue(message)
-          })
-        })
-      },
-      onEdit(){
-        this.editor.on("change", (e)=>{
-          // user が変更した場合のみ watch
-          if(this.editor.curOp && this.editor.curOp.command.name) {
-            this.isEdit = true
-            client.emit('message', this.editor.getValue())
-            http.put(`/room/${this.id}/text`, {md: this.editor.getValue()})
-            this.isEdit = false
+      initFirePad(){
+        const config = {
+          apiKey: "AIzaSyBaH8CYz9zVNtKegHt2viukYGAabHCKAlA",
+          authDomain: "field-65e8b.firebaseapp.com",
+          databaseURL: "https://field-65e8b.firebaseio.com"
+        }
+        firebase.initializeApp(config)
+        const firepadRef = firebase.database().ref().child(this.id)
+        const codeMirror = CodeMirror(document.getElementById('before'), { lineWrapping: true });
+
+        const firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {})
+
+        firepad.on('ready', () => {
+          if (firepad.isHistoryEmpty()) {
+            firepad.setText('# hello');
+          }else{
+            this.after = marked(firepad.getText())
           }
         })
-      },
-      fetchText(){
-        http.get(`/room/${this.id}/text`).then(({data}) => {
-          this.editor.setValue(data.md)
+
+        firepad.on('synced', (isSynced) => {
+          if(isSynced) {
+            this.after = marked(firepad.getText())
+          }
         })
       },
       reset(){
@@ -162,6 +149,7 @@
     border: solid 10px #DE4830;
     box-sizing: border-box;
     border-radius: 3px;
+    display: flex
   }
 
   .md #before {
@@ -170,21 +158,6 @@
     display: inline-block;
     letter-spacing: normal;
   }
-
-  /*.md #before textarea {*/
-    /*width: 100%;*/
-    /*height: 100%;*/
-    /*resize: none;*/
-    /*font-size: 15px;*/
-    /*letter-spacing: 2px;*/
-    /*padding: 20px;*/
-    /*box-sizing: border-box;*/
-    /*background: #F7F7F7;*/
-    /*outline: none;*/
-    /*overflow-y: auto;*/
-    /*border: solid 0px;*/
-    /*border-right: solid 1px #27313D;*/
-  /*}*/
 
   .md .after {
     display: inline-block;
@@ -224,15 +197,17 @@
       box-sizing: border-box;
       border-radius: 0px;
     }
+
     .md #before {
       display: block;
-      width:100%;
-      height:calc(45vh - 10px);
+      width: 100%;
+      height: calc(45vh - 10px);
     }
+
     .md .after {
       display: block;
-      width:100%;
-      height:calc(45vh - 10px);
+      width: 100%;
+      height: calc(45vh - 10px);
     }
 
     .message span {
@@ -249,5 +224,15 @@
       height: 10vh;
       margin: 0;
     }
+  }
+</style>
+
+<style>
+  .firepad{
+    height:100%;
+  }
+  .CodeMirror{
+    height:100%;
+    padding:20px;
   }
 </style>

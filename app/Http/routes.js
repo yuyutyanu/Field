@@ -26,6 +26,4 @@ Route.group('version1', function () {
   Route.get('/rooms', 'RoomController.index')
   Route.post('/room', 'RoomController.store')
   Route.post('/login', 'AuthController.store')
-  Route.get('/room/:id/text', 'MdController.index')
-  Route.put('/room/:id/text', 'MdController.store')
 }).prefix('api/v1')
