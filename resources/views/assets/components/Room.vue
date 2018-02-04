@@ -1,5 +1,6 @@
 <template>
   <div>
+    <p class="room">Room: # {{id}}</p>
     <div class="invite">
       <span id="url">{{url}}</span>
       <transition name="fade">
@@ -92,6 +93,13 @@
 </script>
 
 <style scoped>
+  .room{
+    font-size:18px;
+    position: absolute;
+    top: 30px;
+    left:30px;
+    color:#fff;
+  }
   #url {
     font-size: 0px;
   }
@@ -152,7 +160,8 @@
   }
 
   .md #before {
-    width: 50%;
+    min-width:50%;
+    max-width: 50%;
     height: 100%;
     display: inline-block;
     letter-spacing: normal;
@@ -161,7 +170,8 @@
   .md .after {
     display: inline-block;
     vertical-align: top;
-    width: 50%;
+    min-width:50%;
+    max-width: 50%;
     height: 100%;
     overflow-y: auto;
     background: #F7F7F7;
@@ -180,6 +190,9 @@
   }
 
   @media screen and (max-width: 480px) {
+    .room{
+      display: none;
+    }
     .invite {
       text-align: right;
     }
@@ -191,27 +204,28 @@
     }
 
     .container .md {
-      height: 90vh;
+      height: auto;
       border: solid 10px #DE4830;
       box-sizing: border-box;
       border-radius: 0px;
+      display: block;
     }
 
     .md #before {
       display: block;
-      width: 100%;
-      height: calc(45vh - 10px);
+      min-width: 100%;
+      max-width:100%;
     }
 
     .md .after {
       display: block;
-      width: 100%;
-      height: calc(45vh - 10px);
+      min-width: 100%;
+      max-width:100%;
     }
 
     .message span {
       color: #fff;
-      font-size: 10px;
+      font-size: 12px;
     }
 
     .copy {
